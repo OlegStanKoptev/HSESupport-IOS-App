@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSESupport", "HSESupport\HSESupport.csproj", "{A760C5AC-6201-4CBA-A377-FE5C78C5B294}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A760C5AC-6201-4CBA-A377-FE5C78C5B294}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{A760C5AC-6201-4CBA-A377-FE5C78C5B294}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{A760C5AC-6201-4CBA-A377-FE5C78C5B294}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{A760C5AC-6201-4CBA-A377-FE5C78C5B294}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{A760C5AC-6201-4CBA-A377-FE5C78C5B294}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{A760C5AC-6201-4CBA-A377-FE5C78C5B294}.Debug|iPhone.Build.0 = Debug|iPhone
+		{A760C5AC-6201-4CBA-A377-FE5C78C5B294}.Release|iPhone.ActiveCfg = Release|iPhone
+		{A760C5AC-6201-4CBA-A377-FE5C78C5B294}.Release|iPhone.Build.0 = Release|iPhone
+	EndGlobalSection
+EndGlobal

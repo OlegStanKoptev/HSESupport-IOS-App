@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using Foundation;
+using UIKit;
+
+namespace HSESupport
+{
+    public class AlertsTableSource : UITableViewSource
+    {
+        public string CellId { get => "AlertCell"; }
+        List<Alert> tableItems;
+        public AlertsTableSource(List<Alert> alerts)
+        {
+            tableItems = alerts;
+        }
+
+        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+        {
+            var cell = tableView.DequeueReusableCell(CellId, indexPath) as AlertsTableCell;
+            var alert = tableItems[indexPath.Row];
+
+            cell.Title.Text = alert.Title;
+            cell.Picture.Image = UIImage.FromFile(alert.Picture);
+            cell.Content.Text = alert.Text;
+            cell.TimeStamp.Text = alert.TimeCreated;
+
+            return cell;
+        }
+
+        public override nint RowsInSection(UITableView tableview, nint section)
+        {
+            return tableItems.Count;
+        }
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            tableView.DeselectRow(indexPath, true);
+        }
+    }
+}

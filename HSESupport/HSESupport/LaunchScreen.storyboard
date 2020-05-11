@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="17324">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="17323">
+            <objects>
+                <navigationController id="17324" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="17326">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue id="18069" destination="17837" kind="relationship" relationship="rootViewController"/>
+                    </connections>
+                    <nil key="simulatedStatusBarMetrics"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="17327" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="170" y="426"/>
+        </scene>
+        <scene sceneID="17836">
+            <objects>
+                <viewController id="17837" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="17834"/>
+                        <viewControllerLayoutGuide type="bottom" id="17835"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="17838">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="64315" translatesAutoresizingMaskIntoConstraints="NO" image="Images/launchCell.png">
+                                <rect key="frame" x="4" y="80" width="406" height="224"/>
+                                <constraints>
+                                    <constraint id="64383" firstAttribute="height" constant="224"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="64386" translatesAutoresizingMaskIntoConstraints="NO" image="Images/launchCell.png">
+                                <rect key="frame" x="4" y="304" width="406" height="224"/>
+                                <constraints>
+                                    <constraint id="64430" firstAttribute="height" constant="224"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="64436" translatesAutoresizingMaskIntoConstraints="NO" image="Images/launchCell.png">
+                                <rect key="frame" x="4" y="528" width="406" height="224"/>
+                                <constraints>
+                                    <constraint id="66195" firstAttribute="height" constant="224"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="64495" translatesAutoresizingMaskIntoConstraints="NO" image="Images/launchCell.png">
+                                <rect key="frame" x="4" y="752" width="406" height="224"/>
+                                <constraints>
+                                    <constraint id="66352" firstAttribute="height" constant="224"/>
+                                </constraints>
+                            </imageView>
+                            <tabBar contentMode="scaleToFill" id="18408" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="4" y="846" width="406" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items/>
+                                <constraints>
+                                    <constraint id="19309" firstAttribute="height" constant="50"/>
+                                </constraints>
+                            </tabBar>
+                        </subviews>
+                        <constraints>
+                            <constraint id="18632" firstItem="18408" firstAttribute="leading" secondItem="17838" secondAttribute="leadingMargin" constant="-16"/>
+                            <constraint id="18801" firstAttribute="trailingMargin" secondItem="18408" secondAttribute="trailing" constant="-16"/>
+                            <constraint id="18970" firstItem="17835" firstAttribute="top" secondItem="18408" secondAttribute="bottom"/>
+                            <constraint id="64377" firstItem="64315" firstAttribute="leading" secondItem="17838" secondAttribute="leadingMargin" constant="-16"/>
+                            <constraint id="64379" firstAttribute="trailingMargin" secondItem="64315" secondAttribute="trailing" constant="-16"/>
+                            <constraint id="64381" firstItem="64315" firstAttribute="top" secondItem="17834" secondAttribute="bottom" constant="10"/>
+                            <constraint id="64426" firstItem="64386" firstAttribute="leading" secondItem="17838" secondAttribute="leadingMargin" constant="-16"/>
+                            <constraint id="64429" firstAttribute="trailingMargin" secondItem="64386" secondAttribute="trailing" constant="-16"/>
+                            <constraint id="64655" firstItem="64495" firstAttribute="leading" secondItem="17838" secondAttribute="leadingMargin" constant="-16"/>
+                            <constraint id="64660" firstAttribute="trailingMargin" secondItem="64495" secondAttribute="trailing" constant="-16"/>
+                            <constraint id="66013" firstItem="64386" firstAttribute="top" secondItem="17834" secondAttribute="bottom" constant="234"/>
+                            <constraint id="66183" firstItem="64436" firstAttribute="leading" secondItem="17838" secondAttribute="leadingMargin" constant="-16"/>
+                            <constraint id="66188" firstAttribute="trailingMargin" secondItem="64436" secondAttribute="trailing" constant="-16"/>
+                            <constraint id="66190" firstItem="64495" firstAttribute="top" secondItem="64386" secondAttribute="bottom" constant="224"/>
+                            <constraint id="66337" firstItem="64495" firstAttribute="top" secondItem="64436" secondAttribute="bottom"/>
+                        </constraints>
+                    </view>
+                    <navigationItem id="18068" key="navigationItem"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="17839" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="680" y="417"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Images/launchCell.png" width="750" height="448"/>
+    </resources>
+</document>

@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{A760C5AC-6201-4CBA-A377-FE5C78C5B294}|Default">
+  <MonoDevelop.Ide.ItemProperties.HSESupport automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.00008020-000629660CA1002E" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="HSESupport/Info.plist">
+    <Files>
+      <File FileName="HSESupport/AppDelegate.cs" Line="29" Column="18" />
+      <File FileName="HSESupport/Services/Constants.cs" />
+      <File FileName="HSESupport/ProfileTab/NotLoggedViewController.cs" Line="20" Column="56" />
+      <File FileName="HSESupport/TicketsTab/TicketsTabViewController.cs" />
+      <File FileName="HSESupport/TicketsTab/ChatViewController.cs" />
+      <File FileName="HSESupport/ProfileTab/LoggedViewController.cs" />
+      <File FileName="HSESupport/UsersInfo/AlertCreateViewController.cs" />
+      <File FileName="HSESupport/Services/ServerAccess.cs" Line="341" Column="34" />
+      <File FileName="HSESupport/UsersInfo/AlertsTableSource.cs" Line="54" Column="42" />
+      <File FileName="HSESupport/Info.plist" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="HSESupport" expanded="True">
+            <Node name="HSESupport" expanded="True">
+              <Node name="ProfileTab" expanded="True" />
+              <Node name="Services" expanded="True" />
+              <Node name="Info.plist" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

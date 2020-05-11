@@ -1,0 +1,90 @@
+using Foundation;
+using System;
+using System.Threading;
+using UIKit;
+
+namespace HSESupport
+{
+    public partial class AlertCreateViewController : UIViewController
+    {
+        public AlertCreateViewController (IntPtr handle) : base (handle)
+        {
+        }
+
+        Profile User;
+        UINavigationController navigationController;
+        public void SetUser(Profile user, UINavigationController nav)
+        {
+            User = user;
+            navigationController = nav;
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            NavigationItem.Title = "New Alert";
+            AlertTitle.Text = "Alert Title";
+            AlertTitle.TextColor = UIColor.LightGray;
+            Content.Text = "Please enter all information here";
+            Content.TextColor = UIColor.LightGray;
+            NSNotificationCenter.DefaultCenter.AddObserver(UITextView.TextDidBeginEditingNotification, TextDidBeginEditing);
+            NSNotificationCenter.DefaultCenter.AddObserver(UITextView.TextDidEndEditingNotification, TextDidEndEditing);
+            string currentTime = string.Format($"{DateTime.Now.Day:d2}.{DateTime.Now.Month:d2}.{DateTime.Now.Year} {DateTime.Now.Hour:d2}:{DateTime.Now.Minute:d2}:{DateTime.Now.Second:d2}");
+            NavigationItem.RightBarButtonItem = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (x, y) =>
+            {
+                if (AlertTitle.Text != "Alert Title" && Content.Text != "Please enter all information here")
+                {
+                    Alert alert = new Alert()
+                    {
+                        UserEmail = User.Email,
+                        Title = AlertTitle.Text,
+                        Text = Content.Text,
+                        TimeCreated = currentTime,
+                        Picture = "Images/hse_round_logo.png"
+                    };
+                    new Thread(new ThreadStart(async () =>
+                    {
+                        await ServerAccess.PostAlert(alert);
+                        InvokeOnMainThread(() =>
+                        {
+                            navigationController.PopViewController(true);
+                        });
+                    })).Start();
+                }
+                else
+                {
+                    navigationController.PopViewController(true);
+                }
+            });
+        }
+
+        void TextDidBeginEditing(NSNotification notification)
+        {
+            Console.WriteLine(notification.Description);
+            if (notification.Description.Contains("Alert Title"))
+            {
+                AlertTitle.Text = string.Empty;
+                AlertTitle.TextColor = UIColor.Black;
+            }
+            else
+            {
+                Content.Text = string.Empty;
+                Content.TextColor = UIColor.Black;
+            }
+        }
+
+        void TextDidEndEditing(NSNotification notification)
+        {
+            if (AlertTitle.Text == string.Empty)
+            {
+                AlertTitle.Text = "Alert Title";
+                AlertTitle.TextColor = UIColor.LightGray;
+            }
+            if (Content.Text == string.Empty)
+            {
+                Content.Text = "Please enter all information here";
+                Content.TextColor = UIColor.LightGray;
+            }
+        }
+    }
+}
