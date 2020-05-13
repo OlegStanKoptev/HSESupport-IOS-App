@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/launx/HSESupport/HSESupport/HSESupport.csproj": {}
+    "/Users/launx/HSESupport main/HSESupport/HSESupport.csproj": {}
   },
   "projects": {
-    "/Users/launx/HSESupport/HSESupport/HSESupport.csproj": {
+    "/Users/launx/HSESupport main/HSESupport/HSESupport.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/launx/HSESupport/HSESupport/HSESupport.csproj",
+        "projectUniqueName": "/Users/launx/HSESupport main/HSESupport/HSESupport.csproj",
         "projectName": "HSESupport",
-        "projectPath": "/Users/launx/HSESupport/HSESupport/HSESupport.csproj",
+        "projectPath": "/Users/launx/HSESupport main/HSESupport/HSESupport.csproj",
         "packagesPath": "/Users/launx/.nuget/packages/",
-        "outputPath": "/Users/launx/HSESupport/HSESupport/obj/",
+        "outputPath": "/Users/launx/HSESupport main/HSESupport/obj/",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
@@ -62,7 +62,7 @@
             },
             "Xamarin.Essentials": {
               "target": "Package",
-              "version": "[1.5.3.1, )"
+              "version": "[1.5.3.2, )"
             },
             "Xamarin.FFImageLoading": {
               "target": "Package",

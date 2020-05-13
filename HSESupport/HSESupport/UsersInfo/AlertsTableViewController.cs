@@ -27,30 +27,18 @@ namespace HSESupport
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            if (Profile.Instance != null && (Profile.Instance.Status == "Student" || IfFromNews))
-            {
-                NavigationItem.Title = "Alerts";
-                TableView.AllowsSelection = false;
-            }
-            else
-            {
-                NavigationItem.Title = "Search";
-                TableView.AllowsSelection = true;
-            }
             TableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
         }
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-
-            Console.WriteLine(ParentViewController);
-
-
             if (Profile.Instance != null && (Profile.Instance.Status == "Student" || IfFromNews))
             {
                 TableView.RowHeight = UITableView.AutomaticDimension;
                 TableView.EstimatedRowHeight = 113f;
                 TableView.SeparatorStyle = UITableViewCellSeparatorStyle.SingleLine;
+                NavigationItem.Title = "Alerts";
+                TableView.AllowsSelection = false;
                 new Thread(new ThreadStart(async () =>
                 {
                     List<Alert> alerts = await RemoteService.GetAlerts(Profile.Instance.Email);
@@ -66,6 +54,8 @@ namespace HSESupport
             else
             {
                 TableView.TableHeaderView = searchBar;
+                NavigationItem.Title = "Search";
+                TableView.AllowsSelection = true;
                 searchBar.SearchButtonClicked += (sender, e) =>
                 {
                     Console.WriteLine("You clicked on a search button " + index++);

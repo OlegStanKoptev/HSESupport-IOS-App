@@ -19,7 +19,7 @@ namespace HSESupport
         }
         UISearchBar searchBar;
         int index = 1;
-        public bool IfFromNews { get; set; }
+        public bool IfFromNews { get; set; } = false;
         partial void CloseAlertsModule(UIBarButtonItem sender)
         {
             DismissModalViewController(true);
@@ -29,7 +29,8 @@ namespace HSESupport
             base.ViewDidLoad();
             if (Profile.Instance != null && (Profile.Instance.Status == "Student" || IfFromNews))
             {
-                NavigationItem.Title = "Alerts";
+                //NavigationItem.Title = "Alerts";
+                Title = "Alerts";
                 TableView.AllowsSelection = false;
             }
             else
@@ -46,14 +47,14 @@ namespace HSESupport
             Console.WriteLine(ParentViewController);
 
 
-            if (Profile.Instance != null && Profile.Instance.Status == "Student")
+            if (Profile.Instance != null && (Profile.Instance.Status == "Student" || IfFromNews))
             {
                 TableView.RowHeight = UITableView.AutomaticDimension;
                 TableView.EstimatedRowHeight = 113f;
                 TableView.SeparatorStyle = UITableViewCellSeparatorStyle.SingleLine;
                 new Thread(new ThreadStart(async () =>
                 {
-                    List<Alert> alerts = await ServerAccess.GetAlerts(Profile.Instance.Email);
+                    List<Alert> alerts = await RemoteService.GetAlerts(Profile.Instance.Email);
                     InvokeOnMainThread(() =>
                     {
                         if (alerts != null)
@@ -74,7 +75,7 @@ namespace HSESupport
                     string request = searchBar.Text;
                     new Thread(new ThreadStart(async () =>
                     {
-                        List<Profile> users = await ServerAccess.FindProfilesWithNameOrEmail(request);
+                        List<Profile> users = await RemoteService.FindProfilesWithNameOrEmail(request);
                         InvokeOnMainThread(() =>
                         {
                             if (users != null)

@@ -14,12 +14,6 @@ namespace HSESupport
         {
             List<News> NewsList = new List<News>();
             List<string> htmls = new List<string> { @"https://www.hse.ru/news/" };
-            /*
-            for (int i = 2; i <= 3; i++)
-            {
-                htmls.Add(string.Format(@"https://www.hse.ru/news/page{0}.html", i.ToString()));
-            }
-            */
             loadedPageOfNews = 1;
             ParseNews(ref NewsList, htmls);
             return NewsList;

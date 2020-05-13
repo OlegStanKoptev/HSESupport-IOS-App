@@ -75,7 +75,7 @@ namespace HSESupport.TicketsTab
                         imageView.Image = UIImage.FromFile("Images/PicBG@3x.png");
                     }
                     Title.Text = ticket.FullName;
-                    Message.Text = ticket.Topic;
+                    Message.Text = $"{ImageFromStatus(ticket.Status)} {ticket.Topic}";
                 }
                 catch (Exception)
                 {
@@ -83,37 +83,16 @@ namespace HSESupport.TicketsTab
                     UserInitials.Text = char.ToUpper(names[0][0]).ToString() + char.ToUpper(names[1][0]);
                     imageView.Image = UIImage.FromFile("Images/PicBG@3x.png");
                     Title.Text = ticket.FullName;
-                    Message.Text = ticket.Topic;
+                    Message.Text = $"{ImageFromStatus(ticket.Status)} {ticket.Topic}";
                 }
-                new Thread(new ThreadStart(async () =>
-                {
-                    try
-                    {
-                        Profile user = await RemoteService.FindProfileWithId(ticket.UserId);
-                        if (user != null)
-                        {
-                            if (user.HasPicture == 0)
-                            {
-                                if (File.Exists(Constants.Images + ticket.UserId + ".jpg"))
-                                {
-                                    File.Delete(Constants.Images + ticket.UserId + ".jpg");
-                                }
-                            }
-                            else
-                            {
-                                await RemoteService.GetUserPicture(user, Constants.Images);
-                            }
-                        }
-                    }
-                    catch (Exception) { }
-                })).Start();
             }
             else
             {
                 UserInitials.Text = "";
                 imageView.Image = UIImage.FromFile("Images/hse_round_logo.png");
                 Title.Text = ticket.Topic;
-                Message.Text = ticket.LastMessageText;
+                Message.Text = $"{ImageFromStatus(ticket.Status)} {ticket.LastMessageText}";
+
             }
             DateTime dtime = DateTime.ParseExact(ticket.LastMessageTime, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture);
             if (DateTime.Now.Date == dtime.Date)
@@ -125,6 +104,13 @@ namespace HSESupport.TicketsTab
                 Time.Text = dtime.ToShortDateString();
             }
         }
+        private string ImageFromStatus(string status)
+        {
+            if (status == "Open") return "🟢";
+            if (status == "Pending") return "🟡";
+            return"🔴";
+        }
+
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();

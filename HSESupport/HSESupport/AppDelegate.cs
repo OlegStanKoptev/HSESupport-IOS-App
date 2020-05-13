@@ -5,6 +5,11 @@ using WindowsAzure.Messaging;
 using UserNotifications;
 using AC.Components.Util;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using HSESupport.TicketsTab;
+using System.Linq;
+using System.Threading;
+using System.IO;
 
 namespace HSESupport
 {
@@ -31,6 +36,40 @@ namespace HSESupport
                 }
 
                 await RemoteService.GetInfo();
+
+                if (Profile.Instance.Status != "Student")
+                {
+                    List<Profile> users = new List<Profile>();
+                    foreach (var ticket in RemoteService.Tickets)
+                    {
+                        if (users.FirstOrDefault(x => x.UserId == ticket.UserId) == null)
+                        {
+                            Profile user = await RemoteService.FindProfileWithId(ticket.UserId);
+                            users.Add(user);
+                            new Thread(new ThreadStart(async () =>
+                            {
+                                try
+                                {
+                                    if (user != null)
+                                    {
+                                        if (user.HasPicture == 0)
+                                        {
+                                            if (File.Exists(Constants.Images + ticket.UserId + ".jpg"))
+                                            {
+                                                File.Delete(Constants.Images + ticket.UserId + ".jpg");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            await RemoteService.GetUserPicture(user, Constants.Images);
+                                        }
+                                    }
+                                }
+                                catch (Exception) { }
+                            })).Start();
+                        }
+                    }
+                }
             }
         }
 

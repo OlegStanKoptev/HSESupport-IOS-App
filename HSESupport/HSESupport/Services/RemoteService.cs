@@ -17,7 +17,7 @@ namespace HSESupport
 {
     public delegate void NewInformation();
 
-    public class ServerAccess
+    public class RemoteService
     {
         public static event NewInformation UpdateMessagesList;
 
@@ -26,7 +26,7 @@ namespace HSESupport
         public static List<Alert> Alerts { get; set; }
         public static List<News> News { get; set; }
 
-        public static int NeededProfilePageNum { get; set; };
+        public static int NeededProfilePageNum { get; set; }
         static IPublicClientApplication app;
         static AuthenticationResult result;
         static string[] scopes;
@@ -40,13 +40,13 @@ namespace HSESupport
             await UpdateTickets();
             await UpdateMessages();
         }
-        static ServerAccess()
+        static RemoteService()
         {
-            scopes = new string[] { "https://hsesupportapp.onmicrosoft.com/demoapi/read" };
-            string clientId = "d5410d7a-88c3-4d22-a8e7-c1b9ed9ee730";
+            scopes = new string[] { "" };
+            string clientId = "";
             app = PublicClientApplicationBuilder.Create(clientId)
-                .WithB2CAuthority("https://hsesupportapp.b2clogin.com/tfp/hsesupportapp.onmicrosoft.com/B2C_1_signUpSignIn")
-                .WithIosKeychainSecurityGroup("com.koptevcompany.hsesupportapp")
+                .WithB2CAuthority("https://B2C_1_signUpSignIn")
+                .WithIosKeychainSecurityGroup("com.koptev.HSE-Support")
                 .WithRedirectUri($"msal{clientId}://auth")
                 .Build();
 
@@ -58,7 +58,7 @@ namespace HSESupport
         }
 
         #region Authorization
-        public static async Task<bool> LoginProcess()
+        public static async Task<bool> LogInTheUser()
         {
             string firstName = "", secondName = "", objectId = "", emailAdress = "";
             try
@@ -116,7 +116,7 @@ namespace HSESupport
                 Console.WriteLine("You cancelled logging in process");
             }
         }
-        public static async Task<bool> SilentLogIn()
+        public static async Task<bool> SilentLogInPossible()
         {
             try
             {
@@ -152,14 +152,13 @@ namespace HSESupport
             }
             catch (FlurlHttpException ex)
             {
-                var exception = ex;
                 if (ex.Call.HttpStatus.Value == HttpStatusCode.NotFound)
                 {
                     Profile.Instance = await (Constants.APIAdress + "/api/users/")
                         .PostJsonAsync(new { Name = name, UserId = id, Status = "Student", Email = email })
                         .ReceiveJson<Profile>();
                 }
-                Console.WriteLine(exception.Message);
+                Console.WriteLine(ex.Message);
             }
             Console.WriteLine(Profile.Instance != null ? "Profile found" : "Profile not found");
         }
