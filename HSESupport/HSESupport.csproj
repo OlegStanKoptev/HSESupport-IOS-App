@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+        <ProjectGuid>{A760C5AC-6201-4CBA-A377-FE5C78C5B294}</ProjectGuid>
+        <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+        <TemplateGuid>{edc1b0fa-90cd-4038-8fad-98fe74adb368}</TemplateGuid>
+        <OutputType>Exe</OutputType>
+        <RootNamespace>HSESupport</RootNamespace>
+        <AssemblyName>HSESupport</AssemblyName>
+        <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+        <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+        <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+        <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+        <ProvisioningType>automatic</ProvisioningType>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+        <DefineConstants>DEBUG</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <MtouchArch>x86_64</MtouchArch>
+        <MtouchLink>None</MtouchLink>
+        <MtouchDebug>true</MtouchDebug>
+        <CodesignKey>Apple Development: Oleg Koptev (48J96NA9N9)</CodesignKey>
+        <MtouchExtraArgs>--setenv:ENTITLEMENTS_REQUIRED=YES</MtouchExtraArgs>
+        <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+        <CodesignProvision>HSE Support Testing Profile</CodesignProvision>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+        <DebugType>none</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <MtouchLink>None</MtouchLink>
+        <MtouchArch>x86_64</MtouchArch>
+        <CodesignKey>iPhone Developer</CodesignKey>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\iPhone\Debug</OutputPath>
+        <DefineConstants>DEBUG</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <MtouchArch>ARM64</MtouchArch>
+        <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+        <CodesignKey>Apple Development: Oleg Koptev (48J96NA9N9)</CodesignKey>
+        <MtouchDebug>true</MtouchDebug>
+        <CodesignProvision>HSE Support Testing Profile</CodesignProvision>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+        <DebugType>none</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\iPhone\Release</OutputPath>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+        <MtouchArch>ARM64</MtouchArch>
+        <CodesignKey>iPhone Distribution: Oleg Koptev (2ZY3SQBRC4)</CodesignKey>
+        <CodesignProvision>HSE Support Distribution Profile</CodesignProvision>
+        <MtouchUseLlvm>true</MtouchUseLlvm>
+        <MtouchFloat32>true</MtouchFloat32>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Core" />
+        <Reference Include="Xamarin.iOS" />
+        <Reference Include="System.Numerics" />
+        <Reference Include="System.Numerics.Vectors" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+      <PackageReference Include="Xamarin.FFImageLoading">
+        <Version>2.4.11.982</Version>
+      </PackageReference>
+      <PackageReference Include="Microsoft.Identity.Client">
+        <Version>4.13.0</Version>
+      </PackageReference>
+      <PackageReference Include="Xamarin.Azure.NotificationHubs.iOS">
+        <Version>2.0.4</Version>
+      </PackageReference>
+      <PackageReference Include="Flurl">
+        <Version>2.8.2</Version>
+      </PackageReference>
+      <PackageReference Include="Flurl.Http">
+        <Version>2.4.2</Version>
+      </PackageReference>
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt">
+        <Version>6.5.1</Version>
+      </PackageReference>
+      <PackageReference Include="Microsoft.IdentityModel.Tokens">
+        <Version>6.5.1</Version>
+      </PackageReference>
+      <PackageReference Include="HtmlAgilityPack">
+        <Version>1.11.23</Version>
+      </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+            <Visible>false</Visible>
+        </ImageAsset>
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_20pt%402x-2.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_20pt%403x-1.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_29pt%402x-2.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_29pt%403x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_40pt%402x-2.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_40pt%403x-1.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_60pt%402x-1.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_60pt%403x-1.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_20pt-1.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_20pt%402x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_29pt-1.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_29pt%402x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_40pt-1.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_40pt%402x.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_76pt-1.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_76pt%402x-1.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_83.5%402x-1.png" />
+        <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-1.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Resources\" />
+    </ItemGroup>
+    <ItemGroup>
+        <InterfaceDefinition Include="LaunchScreen.storyboard" />
+        <InterfaceDefinition Include="Main.storyboard" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="Info.plist" />
+        <None Include="Entitlements.plist" />
+        <None Include="Images\cupertino_activity_indicator_selective.gif" />
+        <None Include="Images\hse_round_logo.pdf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Main.cs" />
+        <Compile Include="AppDelegate.cs" />
+        <Compile Include="SceneDelegate.cs" />
+        <Compile Include="ViewController.cs" />
+        <Compile Include="ViewController.designer.cs">
+            <DependentUpon>ViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="UsersInfo\AlertCreateViewController.cs" />
+        <Compile Include="UsersInfo\AlertsTableViewController.cs" />
+        <Compile Include="UsersInfo\UserInfoAlertsTicketsTicketTableCell.designer.cs" />
+        <Compile Include="UsersInfo\AlertsTableViewController.designer.cs" />
+        <Compile Include="UsersInfo\AlertsTableSource.cs" />
+        <Compile Include="UsersInfo\UserInfoAlertsTicketsTableCell.designer.cs" />
+        <Compile Include="UsersInfo\UsersTableCell.cs" />
+        <Compile Include="UsersInfo\UserInfoAlertsTicketsTicketTableCell.cs" />
+        <Compile Include="UsersInfo\NavigationControllerForAlertsTable.designer.cs" />
+        <Compile Include="UsersInfo\AlertsTableCell.cs" />
+        <Compile Include="UsersInfo\UsersTableSource.cs" />
+        <Compile Include="UsersInfo\UserInfoAlertsTicketsTableView.cs" />
+        <Compile Include="UsersInfo\TicketInfoViewController.cs" />
+        <Compile Include="UsersInfo\UserInfoAlertsTicketsTableView.designer.cs" />
+        <Compile Include="UsersInfo\UsersSearchViewController.designer.cs" />
+        <Compile Include="UsersInfo\UserInfoAlertsTicketsTableCell.cs" />
+        <Compile Include="UsersInfo\UsersSearchViewController.cs" />
+        <Compile Include="UsersInfo\TicketInfoViewController.designer.cs" />
+        <Compile Include="UsersInfo\AlertCreateViewController.designer.cs" />
+        <Compile Include="UsersInfo\NavigationControllerForAlertsTable.cs" />
+        <Compile Include="UsersInfo\TempNavigationController.cs" />
+        <Compile Include="UsersInfo\AlertsTableCell.designer.cs" />
+        <Compile Include="UsersInfo\UserInfoAlertsTicketTableSource.cs" />
+        <Compile Include="UsersInfo\TempNavigationController.designer.cs" />
+        <Compile Include="TicketsTab\ChatTableCellSystem.designer.cs" />
+        <Compile Include="TicketsTab\TicketsTabViewController.designer.cs" />
+        <Compile Include="TicketsTab\ChatTableCell.cs" />
+        <Compile Include="TicketsTab\Message.cs" />
+        <Compile Include="TicketsTab\ChatViewController.designer.cs" />
+        <Compile Include="TicketsTab\Ticket.cs" />
+        <Compile Include="TicketsTab\ChatTableCellUser.designer.cs" />
+        <Compile Include="TicketsTab\ImageViewController.cs" />
+        <Compile Include="TicketsTab\TicketsTableSource.cs" />
+        <Compile Include="TicketsTab\ChatTableCellUser.cs" />
+        <Compile Include="TicketsTab\TicketsTabViewController.cs" />
+        <Compile Include="TicketsTab\ChatTableCellOther.cs" />
+        <Compile Include="TicketsTab\ChatViewController.cs" />
+        <Compile Include="TicketsTab\ImageViewController.designer.cs" />
+        <Compile Include="TicketsTab\ChatTableCellSystem.cs" />
+        <Compile Include="TicketsTab\ChatTableCellOther.designer.cs" />
+        <Compile Include="TicketsTab\MessagesTableSource.cs" />
+        <Compile Include="TicketsTab\TicketsCell.cs" />
+        <Compile Include="Services\Constants.cs" />
+        <Compile Include="Services\AsyncHelper.cs" />
+        <Compile Include="Services\UserNotificationCenterDelegate.cs" />
+        <Compile Include="ProfileTab\Profile.cs" />
+        <Compile Include="ProfileTab\ProfileViewController.cs" />
+        <Compile Include="ProfileTab\LoggedViewController.cs" />
+        <Compile Include="ProfileTab\ContainerViewController.designer.cs" />
+        <Compile Include="ProfileTab\NotLoggedViewController.cs" />
+        <Compile Include="ProfileTab\LoggedViewController.designer.cs" />
+        <Compile Include="ProfileTab\ProfileSegue.cs" />
+        <Compile Include="ProfileTab\ProfileViewController.designer.cs" />
+        <Compile Include="ProfileTab\NotLoggedViewController.designer.cs" />
+        <Compile Include="ProfileTab\ProfileSegue.designer.cs" />
+        <Compile Include="ProfileTab\ContainerViewController.cs" />
+        <Compile Include="NewsTab\NewsCell.cs" />
+        <Compile Include="NewsTab\NewsUpdate.cs" />
+        <Compile Include="NewsTab\NewsTabViewController.designer.cs" />
+        <Compile Include="NewsTab\News.cs" />
+        <Compile Include="NewsTab\NewsTabViewController.cs" />
+        <Compile Include="NewsTab\Alert.cs" />
+        <Compile Include="NewsTab\NewsTableSource.cs" />
+        <Compile Include="MainTabViewController.designer.cs" />
+        <Compile Include="MainTabViewController.cs" />
+        <Compile Include="OneMoreNavigationController.cs" />
+        <Compile Include="OneMoreNavigationController.designer.cs">
+          <DependentUpon>OneMoreNavigationController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Services\RemoteService.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <BundleResource Include="Images\launchCellInside.png" />
+      <BundleResource Include="Images\Error.png" />
+      <BundleResource Include="Images\PicBG%403x.png" />
+      <BundleResource Include="Images\hse_logo.jpg" />
+      <BundleResource Include="Images\launchCell.png" />
+      <BundleResource Include="Images\hse_round_logo.png" />
+    </ItemGroup>
+    <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>
