@@ -26,10 +26,9 @@
         <MtouchArch>x86_64</MtouchArch>
         <MtouchLink>None</MtouchLink>
         <MtouchDebug>true</MtouchDebug>
-        <CodesignKey>Apple Development: Oleg Koptev (48J96NA9N9)</CodesignKey>
+        <CodesignKey>iPhone Developer</CodesignKey>
         <MtouchExtraArgs>--setenv:ENTITLEMENTS_REQUIRED=YES</MtouchExtraArgs>
         <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-        <CodesignProvision>HSE Support Testing Profile</CodesignProvision>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
         <DebugType>none</DebugType>

@@ -220,29 +220,39 @@ namespace HSESupport.TicketsTab
                         TicketId = messages[0].TicketId,
                         Type = "Picture"
                     };
-                    originalImage.AsJPEG().Save(Constants.Images + fileName.ToString() + ".jpg", false);
-                    UIImage image = await ImageService.Instance.LoadFile(Constants.Images + fileName.ToString() + ".jpg")
-                                            .DownSample(width: 385)
-                                            .AsUIImageAsync();
-                    image.AsJPEG().Save(Constants.Images + fileName.ToString() + ".jpg", false);
-                    Ticket ticket = RemoteService.Tickets.Find(x => x.Id == message.TicketId);
-                    ticket.LastMessageText = "Picture";
-                    ticket.LastMessageTime = message.SendTime;
-                    await RemoteService.UpdateTicketInfo(ticket);
-                    DateTime previousMessageTime = DateTime.ParseExact(messages[messages.Count - 1].SendTime, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-                    Message dateMessage = null;
-                    if (previousMessageTime.Date != DateTime.Today)
+                    try
                     {
-                        dateMessage = new Message()
+                        originalImage.AsJPEG().Save(Constants.Images + fileName.ToString() + ".jpg", false);
+                        if (!File.Exists(Constants.Images + fileName.ToString() + ".jpg"))
                         {
-                            Text = $"{DateTime.Now.Day:d2}.{DateTime.Now.Month:d2}.{DateTime.Now.Year}",
-                            Sender = "System",
-                            SendTime = string.Format($"{DateTime.Now.Day:d2}.{DateTime.Now.Month:d2}.{DateTime.Now.Year} {DateTime.Now.Hour:d2}:{DateTime.Now.Minute:d2}:{DateTime.Now.Second:d2}"),
-                            UserId = messages[0].UserId,
-                            TicketId = messages[0].TicketId,
-                            Type = "Text"
-                        };
-                        await RemoteService.SendMessage(dateMessage);
+                            throw new Exception();
+                        }
+                        UIImage image = await ImageService.Instance.LoadFile(Constants.Images + fileName.ToString() + ".jpg")
+                                                .DownSample(width: 385)
+                                                .AsUIImageAsync();
+                        image.AsJPEG().Save(Constants.Images + fileName.ToString() + ".jpg", false);
+                        Ticket ticket = RemoteService.Tickets.Find(x => x.Id == message.TicketId);
+                        ticket.LastMessageText = "Picture";
+                        ticket.LastMessageTime = message.SendTime;
+                        await RemoteService.UpdateTicketInfo(ticket);
+                        DateTime previousMessageTime = DateTime.ParseExact(messages[messages.Count - 1].SendTime, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                        Message dateMessage = null;
+                        if (previousMessageTime.Date != DateTime.Today)
+                        {
+                            dateMessage = new Message()
+                            {
+                                Text = $"{DateTime.Now.Day:d2}.{DateTime.Now.Month:d2}.{DateTime.Now.Year}",
+                                Sender = "System",
+                                SendTime = string.Format($"{DateTime.Now.Day:d2}.{DateTime.Now.Month:d2}.{DateTime.Now.Year} {DateTime.Now.Hour:d2}:{DateTime.Now.Minute:d2}:{DateTime.Now.Second:d2}"),
+                                UserId = messages[0].UserId,
+                                TicketId = messages[0].TicketId,
+                                Type = "Text"
+                            };
+                            await RemoteService.SendMessage(dateMessage);
+                        }
+                    } catch (Exception)
+                    {
+                        return;
                     }
                     await RemoteService.SendPictureAsAttachment(message, Profile.Instance, Constants.Images + fileName.ToString() + ".jpg");
                     if (File.Exists(Constants.Images + fileName.ToString() + ".jpg"))

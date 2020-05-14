@@ -1,5 +1,4 @@
-﻿using System;
-namespace HSESupport
+namespace HSESupportAPI.Models
 {
     public class Alert
     {

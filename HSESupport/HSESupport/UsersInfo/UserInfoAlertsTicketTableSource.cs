@@ -45,7 +45,7 @@ namespace HSESupport
                 var cell = tableView.DequeueReusableCell(TicketCellID, indexPath) as UserInfoAlertsTicketsTicketTableCell;
                 Ticket ticket = Tickets[indexPath.Row];
                 cell.Title.Text = ticket.Topic;
-                cell.HeadLine.Text = ticket.LastMessageText;
+                cell.HeadLine.Text = $"{ImageFromStatus(ticket.Status)} {ticket.LastMessageText}";
                 DateTime dtime = DateTime.ParseExact(ticket.LastMessageTime, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                 if (DateTime.Now.Date == dtime.Date)
                 {
@@ -63,6 +63,13 @@ namespace HSESupport
         public override nint RowsInSection(UITableView tableview, nint section)
         {
             return Alerts != null ? Alerts.Count : Tickets.Count;
+        }
+
+        private string ImageFromStatus(string status)
+        {
+            if (status == "Open") return "🟢";
+            if (status == "Pending") return "🟡";
+            return "🔴";
         }
 
         public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)

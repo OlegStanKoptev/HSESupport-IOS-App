@@ -45,7 +45,7 @@ namespace HSESupport
             scopes = new string[] { "" };
             string clientId = "";
             app = PublicClientApplicationBuilder.Create(clientId)
-                .WithB2CAuthority("https://B2C_1_signUpSignIn")
+                .WithB2CAuthority("")
                 .WithIosKeychainSecurityGroup("com.koptev.HSE-Support")
                 .WithRedirectUri($"msal{clientId}://auth")
                 .Build();

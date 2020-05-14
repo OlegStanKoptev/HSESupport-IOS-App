@@ -12,7 +12,7 @@ namespace HSESupport
         {
             searchBar = new UISearchBar()
             {
-                Placeholder = "Enter user's name",
+                Placeholder = "Enter user's name or email",
                 Frame = new CoreGraphics.CGRect(0, 0, View.Frame.Width, 54),
                 ShowsCancelButton = true
             };

@@ -16,30 +16,32 @@ namespace HSESupport
             base.ViewDidLoad();
             LogInButton.TouchUpInside += async (x, y) =>
             {
+                try {
                 await RemoteService.NonSilentLogIn();
-                if (await RemoteService.LogInTheUser())
-                {
-                    RemoteService.NeededProfilePageNum = 1;
-                    ((ProfileViewController)(ParentViewController.ParentViewController)).PresentContainerView(1);
-                    if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+                    if (await RemoteService.LogInTheUser())
                     {
-                        UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound,
-                            (granted, error) =>
-                            {
-                                if (granted)
-                                    InvokeOnMainThread(UIApplication.SharedApplication.RegisterForRemoteNotifications);
-                            });
-                    }
-                    else if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
-                    {
-                        var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
-                                UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
-                                new NSSet());
+                        RemoteService.NeededProfilePageNum = 1;
+                        ((ProfileViewController)(ParentViewController.ParentViewController)).PresentContainerView(1);
+                        if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+                        {
+                            UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound,
+                                (granted, error) =>
+                                {
+                                    if (granted)
+                                        InvokeOnMainThread(UIApplication.SharedApplication.RegisterForRemoteNotifications);
+                                });
+                        }
+                        else if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+                        {
+                            var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
+                                    UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
+                                    new NSSet());
 
-                        UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
-                        UIApplication.SharedApplication.RegisterForRemoteNotifications();
+                            UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
+                            UIApplication.SharedApplication.RegisterForRemoteNotifications();
+                        }
                     }
-                }
+                } catch (Exception) { }
             };
         }
     }

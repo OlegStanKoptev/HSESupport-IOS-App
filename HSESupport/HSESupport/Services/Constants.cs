@@ -20,8 +20,8 @@ namespace HSESupport
         //public static NSData DeviceToken { get; set; }
 
         // Azure app-specific connection string and hub path
-        public const string ListenConnectionString = "endpointString";
-        public const string NotificationHubName = "NotificationHubName";
+        public const string ListenConnectionString = "";
+        public const string NotificationHubName = "";
 
         public static bool ChatIsPresented { get; set; } = false;
     }

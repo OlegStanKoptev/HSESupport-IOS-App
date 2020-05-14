@@ -143,41 +143,44 @@ namespace HSESupport
                 UIImage originalImage = e.Info[UIImagePickerController.OriginalImage] as UIImage;
                 if (originalImage != null)
                 {
-                    if (File.Exists(Constants.Images + Profile.Instance.UserId + ".jpg"))
+                    try
                     {
-                        Console.WriteLine("Found a picture in Images folder for current user");
-                        File.Delete(Constants.Images + Profile.Instance.UserId + ".jpg");
-                    }
-                    originalImage.AsJPEG().Save(Constants.Images + Profile.Instance.UserId + "orig.jpg", true);
-                    Console.WriteLine("OriginalImage height: " + originalImage.CGImage.Height);
-
-                    if (File.Exists(Constants.Images + Profile.Instance.UserId + "orig.jpg"))
-                    {
-                        Console.WriteLine("Found original picture.");
-                    }
-                    new Thread(new ThreadStart(async () =>
-                    {
-                        UIImage lowQualityImage = await ImageService.Instance.LoadFile(Constants.Images + Profile.Instance.UserId + "orig.jpg")
-                                        .DownSample(height: 100)
-                                        .AsUIImageAsync();
                         if (File.Exists(Constants.Images + Profile.Instance.UserId + ".jpg"))
                         {
+                            Console.WriteLine("Found a picture in Images folder for current user");
                             File.Delete(Constants.Images + Profile.Instance.UserId + ".jpg");
                         }
-                        Console.WriteLine("lowQualityImage height: " + lowQualityImage.CGImage.Height);
-                        lowQualityImage.AsJPEG().Save(Constants.Images + Profile.Instance.UserId + ".jpg", false);
+                        originalImage.AsJPEG().Save(Constants.Images + Profile.Instance.UserId + "orig.jpg", true);
+                        Console.WriteLine("OriginalImage height: " + originalImage.CGImage.Height);
 
-                        InvokeOnMainThread(() =>
+                        if (!File.Exists(Constants.Images + Profile.Instance.UserId + "orig.jpg"))
                         {
-                            if (UserInitials != null)
+                            throw new Exception();
+                        }
+                        new Thread(new ThreadStart(async () =>
+                        {
+                            UIImage lowQualityImage = await ImageService.Instance.LoadFile(Constants.Images + Profile.Instance.UserId + "orig.jpg")
+                                            .DownSample(height: 100)
+                                            .AsUIImageAsync();
+                            if (File.Exists(Constants.Images + Profile.Instance.UserId + ".jpg"))
                             {
-                                UserInitials.Text = string.Empty;
+                                File.Delete(Constants.Images + Profile.Instance.UserId + ".jpg");
                             }
-                            UserPicture.Image = lowQualityImage;
-                        });
+                            Console.WriteLine("lowQualityImage height: " + lowQualityImage.CGImage.Height);
+                            lowQualityImage.AsJPEG().Save(Constants.Images + Profile.Instance.UserId + ".jpg", false);
 
-                        await RemoteService.SetUserPicture(Profile.Instance);
-                    })).Start();
+                            InvokeOnMainThread(() =>
+                            {
+                                if (UserInitials != null)
+                                {
+                                    UserInitials.Text = string.Empty;
+                                }
+                                UserPicture.Image = lowQualityImage;
+                            });
+
+                            await RemoteService.SetUserPicture(Profile.Instance);
+                        })).Start();
+                    } catch (Exception) { }
                 }
             }
             else

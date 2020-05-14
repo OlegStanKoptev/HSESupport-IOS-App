@@ -26,51 +26,55 @@ namespace HSESupport
 
         private async Task LogInProcessing()
         {
-            if (await RemoteService.SilentLogInPossible().ConfigureAwait(false))
+            try
             {
-                await RemoteService.LogInTheUser().ConfigureAwait(false);
-
-                if (Profile.Instance.HasPicture == 1)
+                if (await RemoteService.SilentLogInPossible().ConfigureAwait(false))
                 {
-                    await RemoteService.GetUserPicture(Profile.Instance, Constants.Images).ConfigureAwait(false);
-                }
+                    await RemoteService.LogInTheUser().ConfigureAwait(false);
 
-                await RemoteService.GetInfo();
-
-                if (Profile.Instance.Status != "Student")
-                {
-                    List<Profile> users = new List<Profile>();
-                    foreach (var ticket in RemoteService.Tickets)
+                    if (Profile.Instance.HasPicture == 1)
                     {
-                        if (users.FirstOrDefault(x => x.UserId == ticket.UserId) == null)
+                        await RemoteService.GetUserPicture(Profile.Instance, Constants.Images).ConfigureAwait(false);
+                    }
+
+                    await RemoteService.GetInfo();
+
+                    if (Profile.Instance.Status != "Student")
+                    {
+                        List<Profile> users = new List<Profile>();
+                        foreach (var ticket in RemoteService.Tickets)
                         {
-                            Profile user = await RemoteService.FindProfileWithId(ticket.UserId);
-                            users.Add(user);
-                            new Thread(new ThreadStart(async () =>
+                            if (users.FirstOrDefault(x => x.UserId == ticket.UserId) == null)
                             {
-                                try
+                                Profile user = await RemoteService.FindProfileWithId(ticket.UserId);
+                                users.Add(user);
+                                new Thread(new ThreadStart(async () =>
                                 {
-                                    if (user != null)
+                                    try
                                     {
-                                        if (user.HasPicture == 0)
+                                        if (user != null)
                                         {
-                                            if (File.Exists(Constants.Images + ticket.UserId + ".jpg"))
+                                            if (user.HasPicture == 0)
                                             {
-                                                File.Delete(Constants.Images + ticket.UserId + ".jpg");
+                                                if (File.Exists(Constants.Images + ticket.UserId + ".jpg"))
+                                                {
+                                                    File.Delete(Constants.Images + ticket.UserId + ".jpg");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                await RemoteService.GetUserPicture(user, Constants.Images);
                                             }
                                         }
-                                        else
-                                        {
-                                            await RemoteService.GetUserPicture(user, Constants.Images);
-                                        }
                                     }
-                                }
-                                catch (Exception) { }
-                            })).Start();
+                                    catch (Exception) { }
+                                })).Start();
+                            }
                         }
                     }
                 }
             }
+            catch (Exception) { }
         }
 
         [Export("application:didFinishLaunchingWithOptions:")]

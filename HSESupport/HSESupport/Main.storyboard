@@ -276,7 +276,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="159210">
-                                <rect key="frame" x="0.0" y="494" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="492" width="375" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
                                     <action selector="ChoosePicture_Pressed:" destination="159212" id="159211" eventType="touchUpInside"/>
@@ -299,7 +299,7 @@
                             <constraint id="147944" firstItem="60893" firstAttribute="top" secondItem="147803" secondAttribute="bottom" constant="10"/>
                             <constraint id="147951" firstItem="147803" firstAttribute="leading" secondItem="9036" secondAttribute="leadingMargin" constant="-16"/>
                             <constraint id="147954" firstAttribute="trailingMargin" secondItem="147803" secondAttribute="trailing" constant="-16"/>
-                            <constraint id="159261" firstItem="147803" firstAttribute="top" secondItem="159210" secondAttribute="bottom" constant="8"/>
+                            <constraint id="159261" firstItem="147803" firstAttribute="top" secondItem="159210" secondAttribute="bottom" constant="10"/>
                             <constraint id="159267" firstItem="159210" firstAttribute="leading" secondItem="9036" secondAttribute="leadingMargin" constant="-16"/>
                             <constraint id="159271" firstAttribute="trailingMargin" secondItem="159210" secondAttribute="trailing" constant="-16"/>
                         </constraints>
