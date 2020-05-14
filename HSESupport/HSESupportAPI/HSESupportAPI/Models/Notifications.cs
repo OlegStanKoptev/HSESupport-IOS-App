@@ -11,8 +11,8 @@ namespace HSESupportAPI.Models
 
         private Notifications()
         {
-            string notificationHubConnection = "Endpoint=sb://namespaceformyprojects.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=JieudvKc+VSCDeTjfjyit6HcWBEZW7jDn7Ev0vDDkHU=";
-            string notificationHubName = "HSESupportAppNotifHub";
+            string notificationHubConnection = "";
+            string notificationHubName = "";
             Hub = NotificationHubClient.CreateClientFromConnectionString(notificationHubConnection, notificationHubName);
         }
     }
